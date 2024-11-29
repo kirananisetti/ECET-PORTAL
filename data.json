@@ -4,10 +4,10 @@
         "year": "2",
         "semester": "1",
         "subjectCode": "CS101",
-        "subjectName": "Computer Science Basics",
+        "subjectName": "Mathematics 4",
         "internals": "40",
-        "externals": "60",
-        "credits": "4"
+        "externals": "A",
+        "credits": "3"
     },
     {
         "rollNumber": "12345",
