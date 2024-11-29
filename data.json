@@ -6,7 +6,7 @@
         "subjectCode": "CS101",
         "subjectName": "Computer Science Basics",
         "internals": "40",
-        "externals": "A+",   // Changed to grade
+        "externals": "60",
         "credits": "4"
     },
     {
@@ -16,7 +16,7 @@
         "subjectCode": "MA101",
         "subjectName": "Mathematics I",
         "internals": "35",
-        "externals": "B",   // Changed to grade
+        "externals": "65",
         "credits": "4"
     },
     {
@@ -26,7 +26,7 @@
         "subjectCode": "EE201",
         "subjectName": "Electrical Engineering Basics",
         "internals": "30",
-        "externals": "C",   // Changed to grade
+        "externals": "70",
         "credits": "4"
     }
 ]
