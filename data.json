@@ -1,14 +1,32 @@
 [
-  {
-    "rollNumber": "23JD5A0201",
-    "year": "3",
-    "semester": "1",
-    "result": "Pass"
-  },
-  {
-    "rollNumber": "23JD5A0201",
-    "year": "3",
-    "semester": "2",
-    "result": "Fail"
-  }
+    {
+        "rollNumber": "23JD5A0201",
+        "year": "2",
+        "semester": "1",
+        "subjectCode": "CS101",
+        "subjectName": "Computer Science Basics",
+        "internals": "40",
+        "externals": "60",
+        "credits": "4"
+    },
+    {
+        "rollNumber": "23JD5A0201",
+        "year": "2",
+        "semester": "1",
+        "subjectCode": "MA101",
+        "subjectName": "Mathematics I",
+        "internals": "35",
+        "externals": "65",
+        "credits": "4"
+    },
+    {
+        "rollNumber": "23JD5A0201",
+        "year": "3",
+        "semester": "2",
+        "subjectCode": "EE201",
+        "subjectName": "Electrical Engineering Basics",
+        "internals": "30",
+        "externals": "70",
+        "credits": "4"
+    }
 ]
