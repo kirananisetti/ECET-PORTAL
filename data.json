@@ -5,9 +5,9 @@
         "semester": "1",
         "subjectCode": "CS101",
         "subjectName": "Computer Science Basics",
-        "internals": "40",
+        "internals": "18",
         "externals": "A+",
-        "credits": "4"
+        "credits": "3"
     },
     {
         "rollNumber": "23JD5A0201",
@@ -15,9 +15,9 @@
         "semester": "1",
         "subjectCode": "MA101",
         "subjectName": "Mathematics I",
-        "internals": "35",
+        "internals": "16",
         "externals": "B",
-        "credits": "4"
+        "credits": "3"
     },
     {
         "rollNumber": "23JD5A0201",
@@ -25,8 +25,8 @@
         "semester": "2",
         "subjectCode": "EE201",
         "subjectName": "Electrical Engineering Basics",
-        "internals": "30",
+        "internals": "17",
         "externals": "C",
-        "credits": "4"
+        "credits": "3"
     }
 ]
