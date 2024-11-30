@@ -4,7 +4,7 @@
         "year": "2",
         "semester": "1",
         "subjectCode": "CS101",
-        "subjectName": "Computer Science Basics",
+        "subjectName": "mathematics 4",
         "internals": "18",
         "externals": "A",
         "credits": "3"
@@ -14,19 +14,19 @@
         "year": "2",
         "semester": "1",
         "subjectCode": "MA101",
-        "subjectName": "Maths I",
+        "subjectName": "POWER SYSTEMS 2",
         "internals": "16",
         "externals": "B",
         "credits": "3"
     },
     {
         "rollNumber": "23JD5A0201",
-        "year": "3",
-        "semester": "2",
+        "year": "2",
+        "semester": "1",
         "subjectCode": "EE201",
         "subjectName": "Electrical Engineering Basics",
         "internals": "17",
-        "externals": "C",
+        "externals": "D",
         "credits": "3"
     }
 ]
