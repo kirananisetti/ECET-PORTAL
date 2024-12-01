@@ -1,7 +1,7 @@
 <?php
 header('Content-Type: application/json');
 
-// Sample database data
+// Simulated database (replace with actual database or query logic)
 $data = [
     [
         "rollNumber" => "23JD5A0201",
@@ -18,8 +18,8 @@ $data = [
         "year" => "2",
         "semester" => "1",
         "subjectCode" => "MA101",
-        "subjectName" => "Power Systems",
-        "internals" => "17",
+        "subjectName" => "Power Systems 2",
+        "internals" => "16",
         "externals" => "B",
         "credits" => "3"
     ],
@@ -35,19 +35,29 @@ $data = [
     ]
 ];
 
-// Get POST data
-$requestBody = file_get_contents('php://input');
-$request = json_decode($requestBody, true);
+try {
+    // Get input data from the frontend
+    $input = json_decode(file_get_contents('php://input'), true);
 
-$rollNumber = $request['rollNumber'];
-$year = $request['year'];
-$semester = $request['semester'];
+    if (!isset($input['rollNumber'], $input['year'], $input['semester'])) {
+        echo json_encode(["status" => "error", "message" => "Invalid input data."]);
+        exit;
+    }
 
-// Filter data based on user input
-$results = array_filter($data, function ($record) use ($rollNumber, $year, $semester) {
-    return $record['rollNumber'] === $rollNumber && $record['year'] === $year && $record['semester'] === $semester;
-});
+    $rollNumber = $input['rollNumber'];
+    $year = $input['year'];
+    $semester = $input['semester'];
 
-// Return results as JSON
-echo json_encode(array_values($results));
-?>
+    // Filter results based on input
+    $results = array_filter($data, function ($item) use ($rollNumber, $year, $semester) {
+        return $item['rollNumber'] === $rollNumber && $item['year'] === $year && $item['semester'] === $semester;
+    });
+
+    if (!empty($results)) {
+        echo json_encode(["status" => "success", "results" => array_values($results)]);
+    } else {
+        echo json_encode(["status" => "error", "message" => "No results found for the provided details."]);
+    }
+} catch (Exception $e) {
+    echo json_encode(["status" => "error", "message" => "Server error: " . $e->getMessage()]);
+}
