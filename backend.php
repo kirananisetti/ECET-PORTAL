@@ -22,7 +22,7 @@ $data = [
         "credits" => "3"
     ],
     [
-        "rollNumber" => "23JD5A0201",
+        "rollNumber" => "23JD5A0202",
         "year" => "2",
         "semester" => "1",
         "subjectCode" => "EE201",
