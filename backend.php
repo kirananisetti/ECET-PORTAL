@@ -8,7 +8,7 @@ $data = [
         "subjectCode" => "CS101",
         "subjectName" => "Mathematics 4",
         "internals" => "18",
-        "externals" => "C",
+        "externals" => "A",
         "credits" => "3"
     ],
     [
