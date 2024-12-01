@@ -1,5 +1,8 @@
 <?php
 header('Content-Type: application/json');
+header("Access-Control-Allow-Origin: *");
+header("Content-Type: application/json; charset=UTF-8");
+fetch('https://kirananisetti.github.io//backend.php')
 
 // Simulated database (replace with actual database or query logic)
 $data = [
