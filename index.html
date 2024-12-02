@@ -1,92 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECET Results Portal</title>
-    <style>
-        /* Add your existing styles here */
-    </style>
-</head>
-<body>
-    <h1>ECET Results Portal</h1>
-    <div class="container">
-        <form id="resultsForm">
-            <input type="text" id="rollNumber" placeholder="Roll Number (e.g., 23JD5A0201)" required>
-            <select id="year" required>
-                <option value="">Select Year</option>
-                <option value="1">1st Year</option>
-                <option value="2">2nd Year</option>
-                <option value="3">3rd Year</option>
-                <option value="4">4th Year</option>
-            </select>
-            <select id="semester" required>
-                <option value="">Select Semester</option>
-                <option value="1">1st Semester</option>
-                <option value="2">2nd Semester</option>
-            </select>
-            <button type="submit">Get Results</button>
-        </form>
-        <div id="resultsContainer" style="display:none;">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Subject Code</th>
-                        <th>Subject Name</th>
-                        <th>Internals</th>
-                        <th>Externals</th>
-                        <th>Credits</th>
-                    </tr>
-                </thead>
-                <tbody id="resultsBody"></tbody>
-            </table>
-        </div>
-        <p id="errorMessage" class="error"></p>
-    </div>
+<script>
+    async function handleSubmit(event) {
+        event.preventDefault(); // Prevent form submission
 
-    <script>
-        document.getElementById('resultsForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
+        const rollNumber = document.getElementById('roll-number').value;
+        const year = document.getElementById('year').value;
+        const semester = document.getElementById('semester').value;
 
-            const rollNumber = document.getElementById('rollNumber').value.trim().toUpperCase();
-            const year = document.getElementById('year').value;
-            const semester = document.getElementById('semester').value;
+        try {
+            const response = await fetch(`results.php?roll_number=${rollNumber}`);
+            const data = await response.json();
 
-            try {
-                const response = await fetch('backend.php', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ rollNumber, year, semester })
-                });
-
-                if (!response.ok) throw new Error('Failed to fetch data from the server.');
-
-                const data = await response.json();
-
-                if (data.status === 'success') {
-                    const resultsBody = document.getElementById('resultsBody');
-                    resultsBody.innerHTML = '';
-                    data.results.forEach(result => {
-                        resultsBody.innerHTML += `
-                            <tr>
-                                <td>${result.subjectCode}</td>
-                                <td>${result.subjectName}</td>
-                                <td>${result.internals}</td>
-                                <td>${result.externals}</td>
-                                <td>${result.credits}</td>
-                            </tr>
-                        `;
-                    });
-                    document.getElementById('resultsContainer').style.display = 'block';
-                    document.getElementById('errorMessage').textContent = '';
-                } else {
-                    throw new Error(data.message || 'No results found.');
-                }
-            } catch (error) {
-                document.getElementById('errorMessage').textContent = error.message;
-                document.getElementById('resultsContainer').style.display = 'none';
+            if (data.error) {
+                alert(data.error);
+                return;
             }
-        });
-    </script>
-</body>
-</html>
+
+            // Create a professional results page dynamically
+            let resultPage = `
+                <div style="text-align: center; margin-top: 50px;">
+                    <h2>Results</h2>
+                    <p><strong>Roll Number:</strong> ${rollNumber}</p>
+                    <p><strong>Year:</strong> ${year}</p>
+                    <p><strong>Semester:</strong> ${semester}</p>
+                    <table border="1" style="width: 80%; margin: 20px auto; border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th>Subject Code</th>
+                                <th>Subject Name</th>
+                                <th>Internals</th>
+                                <th>Grade</th>
+                                <th>Credits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+            `;
+
+            data.forEach(result => {
+                resultPage += `
+                    <tr>
+                        <td>${result.subject_code}</td>
+                        <td>${result.subject_name}</td>
+                        <td>${result.internals}</td>
+                        <td>${result.grade}</td>
+                        <td>${result.credits}</td>
+                    </tr>
+                `;
+            });
+
+            resultPage += `
+                        </tbody>
+                    </table>
+                    <button onclick="window.location.reload()">Go Back</button>
+                </div>
+            `;
+
+            document.body.innerHTML = resultPage; // Replace current page content with results
+        } catch (error) {
+            alert('Error fetching results. Please try again.');
+            console.error(error);
+        }
+    }
+                         </script>
