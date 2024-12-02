@@ -5,67 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ECET Results Portal</title>
     <style>
-        /* Styling */
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #ffecd2, #fcb69f);
-            text-align: center;
-            margin: 0;
-            padding: 0;
-        }
-
-        .container {
-            margin: 50px auto;
-            padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
-            border-radius: 10px;
-            width: 90%;
-            max-width: 500px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        input, select, button {
-            margin: 10px 0;
-            padding: 10px;
-            font-size: 16px;
-            width: 100%;
-            max-width: 400px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-        }
-
-        button {
-            background-color: #fcb69f;
-            color: white;
-            border: none;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
-
-        button:hover {
-            background-color: #f58a6e;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
-        }
-
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #fcb69f;
-            color: white;
-        }
-
-        .error {
-            color: red;
-            margin-top: 10px;
-        }
+        /* Add your existing styles here */
     </style>
 </head>
 <body>
@@ -115,9 +55,7 @@
             try {
                 const response = await fetch('backend.php', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ rollNumber, year, semester })
                 });
 
@@ -127,8 +65,7 @@
 
                 if (data.status === 'success') {
                     const resultsBody = document.getElementById('resultsBody');
-                    resultsBody.innerHTML = ''; // Clear previous results
-
+                    resultsBody.innerHTML = '';
                     data.results.forEach(result => {
                         resultsBody.innerHTML += `
                             <tr>
@@ -140,7 +77,6 @@
                             </tr>
                         `;
                     });
-
                     document.getElementById('resultsContainer').style.display = 'block';
                     document.getElementById('errorMessage').textContent = '';
                 } else {
