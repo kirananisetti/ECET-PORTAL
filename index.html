@@ -3,34 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ECET Results</title>
+    <title>ECET Results Portal</title>
     <style>
-        /* మీ స్టైల్‌లు ఇక్కడ ఉన్నాయి */
-    </style>
-    <script>
-        // JSON ఫైల్ నుండి డేటాను లోడ్ చేయడం
-        async function loadResults() {
-            const response = await fetch('results.json'); // JSON ఫైల్ పాత్
-            const data = await response.json();
-            return data;
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(to right, #ffecd2, #fcb69f);
+            text-align: center;
+            margin: 0;
+            padding: 0;
         }
 
-        // ఫారమ్ సబ్మిట్ హ్యాండ్లింగ్
-        async function handleSubmit(event) {
-            event.preventDefault();
-            const rollNumber = document.getElementById('roll-number').value.toUpperCase();
-            const year = document.getElementById('year').value;
-            const semester = document.getElementById('semester').value;
+        .container {
+            margin: 20px auto;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+        }
 
-            const results = await loadResults();
+        label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, select, button {
+            width: calc(100% - 20px);
+            margin: 10px 0;
+            padding: 10px;
+            font-size: 14px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #fcb69f;
+            color: white;
+        }
+    </style>
+    <script>
+        const results = [
+            {
+                "roll_number": "23JD5A0201",
+                "subject_code": "R2022021",
+                "subject_name": "PYTHON PROGRAMMING",
+                "internals": 24,
+                "grade": "F",
+                "credits": 0
+            },
+            {
+                "roll_number": "23JD5A0201",
+                "subject_code": "R2022022",
+                "subject_name": "DIGITAL ELECTRONICS",
+                "internals": 24,
+                "grade": "D",
+                "credits": 3
+            },
+            {
+                "roll_number": "23JD5A0201",
+                "subject_code": "R2022023",
+                "subject_name": "POWER SYSTEM-I",
+                "internals": 24,
+                "grade": "D",
+                "credits": 3
+            },
+            {
+                "roll_number": "23JD5A0201",
+                "subject_code": "R2022024",
+                "subject_name": "INDUCTION AND SYNCHRONOUS MACHINES",
+                "internals": 24,
+                "grade": "F",
+                "credits": 0
+            },
+            {
+                "roll_number": "23JD5A0201",
+                "subject_code": "R2022025",
+                "subject_name": "PYTHON PROGRAMMING LAB",
+                "internals": 14,
+                "grade": "A+",
+                "credits": 1.5
+            },
+            {
+                "roll_number": "23JD5A0201",
+                "subject_code": "R2022026",
+                "subject_name": "INDUCTION AND SYNCHRONOUS MACHINES LAB",
+                "internals": 15,
+                "grade": "A+",
+                "credits": 1.5
+            },
+            {
+                "roll_number": "23JD5A0201",
+                "subject_code": "R2022027",
+                "subject_name": "DIGITAL ELECTRONICS LAB",
+                "internals": 13,
+                "grade": "A+",
+                "credits": 1.5
+            },
+            {
+                "roll_number": "23JD5A0201",
+                "subject_code": "R2022028",
+                "subject_name": "IOT APPLICATIONS OF ELECTRICAL ENGINEERING",
+                "internals": 0,
+                "grade": "A+",
+                "credits": 2
+            }
+        ];
+
+        function handleSubmit(event) {
+            event.preventDefault();
+
+            const rollNumber = document.getElementById("roll-number").value.toUpperCase();
             const filteredResults = results.filter(result => result.roll_number === rollNumber);
 
-            // రిజల్ట్ ప్రదర్శన
-            const resultContainer = document.getElementById('result-container');
+            const resultContainer = document.getElementById("result-container");
             if (filteredResults.length > 0) {
-                let resultHTML = `<h2>Results for Roll Number: ${rollNumber}</h2>`;
-                resultHTML += `
-                    <table border="1" style="width: 100%; text-align: center;">
+                let tableHTML = `
+                    <table>
                         <thead>
                             <tr>
                                 <th>Subject Code</th>
@@ -42,25 +144,20 @@
                         </thead>
                         <tbody>
                 `;
-
-                filteredResults.forEach(item => {
-                    resultHTML += `
+                filteredResults.forEach(result => {
+                    tableHTML += `
                         <tr>
-                            <td>${item.subject_code}</td>
-                            <td>${item.subject_name}</td>
-                            <td>${item.internals}</td>
-                            <td>${item.grade}</td>
-                            <td>${item.credits}</td>
+                            <td>${result.subject_code}</td>
+                            <td>${result.subject_name}</td>
+                            <td>${result.internals}</td>
+                            <td>${result.grade}</td>
+                            <td>${result.credits}</td>
                         </tr>
                     `;
                 });
 
-                resultHTML += `
-                        </tbody>
-                    </table>
-                    <button onclick="window.location.reload()">Go Back</button>
-                `;
-                resultContainer.innerHTML = resultHTML;
+                tableHTML += `</tbody></table>`;
+                resultContainer.innerHTML = tableHTML;
             } else {
                 resultContainer.innerHTML = `<p>No results found for Roll Number: ${rollNumber}</p>`;
             }
@@ -72,24 +169,24 @@
     <div class="container">
         <form onsubmit="handleSubmit(event)">
             <label for="roll-number">Roll Number:</label>
-            <input type="text" id="roll-number" name="roll-number" required><br>
+            <input type="text" id="roll-number" required>
             <label for="year">Year:</label>
-            <select id="year" name="year" required>
+            <select id="year" required>
                 <option value="">Select</option>
                 <option value="1">1st Year</option>
                 <option value="2">2nd Year</option>
                 <option value="3">3rd Year</option>
                 <option value="4">4th Year</option>
-            </select><br>
+            </select>
             <label for="semester">Semester:</label>
-            <select id="semester" name="semester" required>
+            <select id="semester" required>
                 <option value="">Select</option>
                 <option value="1">1st Semester</option>
                 <option value="2">2nd Semester</option>
-            </select><br>
+            </select>
             <button type="submit">Submit</button>
         </form>
     </div>
-    <div id="result-container" class="container" style="margin-top: 20px;"></div>
+    <div id="result-container" class="container"></div>
 </body>
 </html>
