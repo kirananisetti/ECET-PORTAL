@@ -76,9 +76,8 @@
             const rollNumber = document.getElementById('roll-number').value;
             const year = document.getElementById('year').value;
             const semester = document.getElementById('semester').value;
-            const pin = document.getElementById('pin').value;
 
-            if (!rollNumber || !year || !semester || !pin) {
+            if (!rollNumber || !year || !semester) {
                 alert("Please fill all fields!");
                 return;
             }
@@ -87,7 +86,7 @@
             const response = await fetch('/get-results', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ roll_number: rollNumber, year, semester, pin })
+                body: JSON.stringify({ roll_number: rollNumber, year, semester })
             });
 
             const result = await response.json();
@@ -116,8 +115,6 @@
         <form onsubmit="handleSubmit(event)">
             <label for="roll-number">Roll Number:</label>
             <input type="text" id="roll-number" name="roll-number" oninput="toUpperCaseInput(event)" required><br>
-            <label for="pin">Pin Number:</label>
-            <input type="password" id="pin" name="pin" required><br>
             <label for="year">Year:</label>
             <select id="year" name="year" required>
                 <option value="">Select</option>
