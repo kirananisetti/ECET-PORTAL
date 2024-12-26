@@ -1,66 +1,30 @@
-[
-    {
-        "roll_number": "23JD5A0201",
-        "subject_code": "R2022021",
-        "subject_name": "PYTHON PROGRAMMING",
-        "internals": 24,
-        "grade": "F",
-        "credits": 0
-    },
-    {
-        "roll_number": "23JD5A0201",
-        "subject_code": "R2022022",
-        "subject_name": "DIGITAL ELECTRONICS",
-        "internals": 24,
-        "grade": "D",
-        "credits": 3
-    },
-    {
-        "roll_number": "23JD5A0201",
-        "subject_code": "R2022023",
-        "subject_name": "POWER SYSTEM-I",
-        "internals": 24,
-        "grade": "D",
-        "credits": 3
-    },
-    {
-        "roll_number": "23JD5A0201",
-        "subject_code": "R2022024",
-        "subject_name": "INDUCTION AND SYNCHRONOUS MACHINES",
-        "internals": 24,
-        "grade": "F",
-        "credits": 0
-    },
-    {
-        "roll_number": "23JD5A0201",
-        "subject_code": "R2022025",
-        "subject_name": "PYTHON PROGRAMMING LAB",
-        "internals": 14,
-        "grade": "A+",
-        "credits": 1.5
-    },
-    {
-        "roll_number": "23JD5A0201",
-        "subject_code": "R2022026",
-        "subject_name": "INDUCTION AND SYNCHRONOUS MACHINES LAB",
-        "internals": 15,
-        "grade": "A+",
-        "credits": 1.5
-    },
-    {
-        "roll_number": "23JD5A0201",
-        "subject_code": "R2022027",
-        "subject_name": "DIGITAL ELECTRONICS LAB",
-        "internals": 13,
-        "grade": "A+",
-        "credits": 1.5
-    },
-    {
-        "roll_number": "23JD5A0201",
-        "subject_code": "R2022028",
-        "subject_name": "IOT APPLICATIONS OF ELECTRICAL ENGINEERING",
-        "internals": 0,
-        "grade": "A+",
-        "credits": 2
-    }
-]
+from flask import Flask, jsonify, request
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)  # Enable CORS for frontend-backend communication
+
+# Sample Results Data
+results = {
+    "2-1": [
+        {"subject": "DC Machines and Transformers", "grade": "E", "credits": 3.0},
+        {"subject": "Electro Magnetic Fields", "grade": "F", "credits": 3.0},
+        {"subject": "Electrical Circuits Lab", "grade": "A", "credits": 1.5},
+        {"subject": "DC Machines and Transformers Lab", "grade": "A", "credits": 1.5},
+        {"subject": "Electronic Devices and Circuits Lab", "grade": "A", "credits": 1.5},
+        {"subject": "Skill Oriented Course I", "grade": "A", "credits": 2.0},
+        {"subject": "Professional Ethics & Human Values", "grade": "A+", "credits": 0.0},
+    ]
+}
+
+@app.route('/get_results', methods=['GET'])
+def get_results():
+    year = request.args.get('year')
+    semester = request.args.get('semester')
+    key = f"{year}-{semester}"
+    if key in results:
+        return jsonify({"status": "success", "data": results[key]})
+    return jsonify({"status": "error", "message": "Results not found!"}), 404
+
+if __name__ == '__main__':
+    app.run(debug=True)
