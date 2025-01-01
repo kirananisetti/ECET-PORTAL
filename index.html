@@ -49,6 +49,10 @@
         }
     </style>
     <script>
+        document.addEventListener("contextmenu", function (e) {
+            e.preventDefault();
+        });
+
         async function handleSubmit(event) {
             event.preventDefault();
             const rollNumber = document.getElementById('roll-number').value.toUpperCase();
