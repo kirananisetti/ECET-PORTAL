@@ -84,15 +84,15 @@
                 <h3>Results for ${results[0].roll_number}</h3>
                 <table border="5" style="width:100%; text-align: left; border-collapse: collapse;">
                     <tr>
-                        <th>Subject Code</th>
-                        <th>Subject Name</th>
-                        <th>Internals</th>
-                        <th>Grade</th>
-                        <th>Credits</th>
+                        <th style="text-align:center;">Subject Code</th>
+                        <th style="text-align:center;">Subject Name</th>
+                        <th style="text-align:center;">Internals</th>
+                        <th style="text-align:center;">Grade</th>
+                        <th style="text-align:center;">Credits</th>
                     </tr>
                     ${results.map(result => `
                         <tr>
-                            <td>${result.subject_code}</td>
+                            <td style="text-align:center;">${result.subject_code}</td>
                             <td>${result.subject_name}</td>
                             <td style="text-align:center;">${result.internals}</td>
                             <td style="text-align:center;">${result.grade}</td>
